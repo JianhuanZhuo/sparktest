@@ -17,8 +17,8 @@ public class SparkTest {
 //        JavaSparkContext sc = new JavaSparkContext(conf);
 //        JavaRDD<String> rdd = sc.textFile("/home/tom/share/goods_sale_row_44.csv");
 //        System.out.println(rdd.count());
-        new SCTest().test();
+//        new SCTest().test();
 //        new SCTest().generate();
-//        SC.x();
+        SC.x();
     }
 }

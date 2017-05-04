@@ -19,6 +19,7 @@ class SCTest {
   def test() {
     val sc = new SparkContext("spark://10.10.6.30:7077", "SStest");
 //    sc.setLocalProperty("spark.jars", "/home/tom/idea/sparktest/target/spark-test-1.0-SNAPSHOT.jar")
+    sc.addJar("/home/tom/spark-test-1.0-SNAPSHOT.jar")
 //    println(sc.textFile("/home/tom/share/goods_sale_row_44.csv").count);
 
     val myVertices = sc.makeRDD(Array((1L, "Ann"), (2L, "Bill"),
@@ -30,20 +31,20 @@ class SCTest {
 
     val myGraph = Graph(myVertices, myEdges)
 
-//    val x =myGraph.vertices.collect
-//    x.foreach(println)
-//
-//    // return type of triplet is an RDD of EdgeTriplet[VD, ED], which is a subclass of Edge[VD] that also contains
-//    // references to the source and destination vertices associated with the edge.
-//    val triple = myGraph.triplets.collect
-//
-//    triple.foreach(println)
-//
-//    val line : String = "=====" * 2
-//
-////    val x = s"pi is ${"balbla" * 3}"
-//
-//    println("------------------------------------")
+    val x =myGraph.vertices.collect
+    x.foreach(println)
+
+    // return type of triplet is an RDD of EdgeTriplet[VD, ED], which is a subclass of Edge[VD] that also contains
+    // references to the source and destination vertices associated with the edge.
+    val triple = myGraph.triplets.collect
+
+    triple.foreach(println)
+
+    val line : String = "=====" * 2
+
+//    val x = s"pi is ${"balbla" * 3}"
+
+    println("------------------------------------")
 
     val pa = Array(3L)
     val ca = ShortestPaths.run(myGraph, pa).cache

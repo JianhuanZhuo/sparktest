@@ -15,15 +15,24 @@ object SC {
       if (isremote) new SparkContext("spark://10.10.6.30:7077", "SStest")
       else new SparkContext("local[4]", "SStest")
 
+    sc.addJar("/home/tom/spark-test-1.0-SNAPSHOT.jar")
 
 
 //    val graph = util.GraphGenerators.logNormalGraph(sc, 15)
 
-    val graph = GraphGenerator.hashGraph(sc, 1000, 1).cache()
+    val graph = GraphGenerator.hashGraph(sc, 10, 2).cache()
 
-//    graph.triplets.foreach(println)
-    graph.edges.foreach(println)
+    graph.vertices.collect().foreach(println)
+    println("tcount:"+graph.triplets.count())
+    println("vcount:"+graph.vertices.count())
+    println("ecount:"+graph.edges.count())
+//    graph.edges.foreach(x=>{
+//      println(x.dstId)
+//    })
+//    graph.edges.foreach(println)
 
     println("ok")
+
+    sc.stop()
   }
 }
